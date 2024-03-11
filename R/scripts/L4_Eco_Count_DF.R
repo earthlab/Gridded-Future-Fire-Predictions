@@ -85,6 +85,14 @@ assert_that(all(ecoregions$US_L4NAME %in% count_df$US_L4NAME))
 
 generate_counts <- function(model_name) {
 
+  out_file <- file.path(processed_data_dir, paste0(model_name,  "_Count_df.csv"))
+
+  if (file.exists(out_file)) {
+    return ("File exists")
+  }
+
+  print(model_name)
+
   # load covariate data and link to count data frame
   MACA_sum <- read_csv(file.path(processed_data_dir, paste0(model_name, '_ecoregion_summaries.csv'))) %>%
     filter(year > 2019 & year < 2061)
@@ -117,7 +125,7 @@ generate_counts <- function(model_name) {
       ecoregion_summaries$prev_12mo_precip[i] <- sum(as.numeric(gsub("\"", "", ecoregion_summaries$pr[start_index:i-1])))
     }
   }
-  
+
   if (!file.exists(lagged_precip_path)) {
     ecoregion_summaries %>%
       dplyr::select(US_L4NAME, year, prev_12mo_precip) %>%
@@ -156,7 +164,7 @@ generate_counts <- function(model_name) {
   # Set n_fire to 0 where there's no match
   cnt_df$n_fire[is.na(matching_indices)] <- 0
 
-  write_csv(cnt_df, path = file.path(processed_data_dir, paste0(model_name,  "_Count_df.csv")))
+  write_csv(cnt_df, path = out_file)
 
   print('Count, climate, and housing data integrated and saved in count_df.csv')
 
