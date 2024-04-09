@@ -1,4 +1,4 @@
-FROM jupyter/r-notebook:lab-4.3.2
+FROM jupyter/r-notebook:lab-4.3.1
 
 COPY . .
 
