@@ -57,7 +57,6 @@ RUN apt-get update && apt-get install --yes screen vim
 USER ${NB_UID}
 
 RUN mamba install \
-    libjpeg-turbo==3.0.0 \
     gdal==3.8.4 \
     geos==3.12.1 \
     proj==9.3.1 \
