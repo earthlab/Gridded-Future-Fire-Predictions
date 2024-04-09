@@ -16,22 +16,23 @@ fit_count <- function(model_name) {
     # Determine the number of cores to utilize
     no_cores <- detectCores() - 1  # Leave one core for the main process
 
-    # Parallelize using mclapply (similar to lapply but in parallel)
-    mclapply(subregions, function(subregion) {
-        zi_d <- read_rds(file.path(stan_dir, paste0('zi_d', subregion, '.rds')))
+    for (subregion in subregions) {
+      zi_d <- read_rds(file.path(stan_dir, paste0('zi_d', subregion, '.rds')))
 
-        zinb_init <- stan_model(file.path(raw_data_dir, 'counts-zinb.stan'))
-        zinb_full_fit <- sampling(zinb_init,
-                                  data = zi_d,
-                                  init_r = 0.01,
-                                  iter = 1000, 
-                                  pars =  c('mu_full','count_pred'),
-                                  cores = 16)  
+      zinb_init <- stan_model(file.path(raw_data_dir, 'counts-zinb.stan'))
+      zinb_full_fit <- sampling(zinb_init,
+                                data = zi_d,
+                                init_r = 0.01,
+                                iter = 1000, 
+                                pars =  c('count_pred'),
+                                cores = no_cores)  
 
-        post <- rstan::extract(zinb_full_fit, pars = 'count_pred')
+      post <- rstan::extract(zinb_full_fit, pars = 'count_pred')
 
-        write_rds(post, path = file.path(stan_dir, paste0('post', subregion, '.rds')))
-    }, mc.cores = no_cores) 
+      write_rds(post, path = file.path(stan_dir, paste0('post', subregion, '.rds')))
+
+    }
+        
 }
 
 models <- c("CanESM2", "CNRM", "CSIRO", "HadGEM2-CC", "HadGEM2-ES", "IPSL", "MIROC5", "MRI")
