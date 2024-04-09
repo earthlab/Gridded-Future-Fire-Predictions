@@ -23,34 +23,34 @@ RUN addgroup jovyan
 RUN usermod -aG jovyan jovyan
 
 # # Build RStudio Geospatial
-# RUN apt-get update && \
-#     apt install -y \
-#     gdal-bin \
-#     lbzip2 \
-#     libfftw3-dev \
-#     libgdal-dev=3.8.4 \
-#     libgeos-dev=3.12.1 \
-#     libgsl0-dev \
-#     libgl1-mesa-dev \
-#     libglu1-mesa-dev \
-#     libhdf4-alt-dev \
-#     libhdf5-dev \
-#     libjq-dev \
-#     libpq-dev \
-#     libproj-dev \
-#     libprotobuf-dev \
-#     libnetcdf-dev \
-#     libsqlite3-dev \
-#     libudunits2-dev \
-#     lsb-release \
-#     netcdf-bin \
-#     postgis \
-#     protobuf-compiler \
-#     sqlite3 \
-#     tk-dev \
-#     libfmt-dev \
-#     unixodbc-dev && \
-#     apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt install -y \
+    gdal-bin \
+    lbzip2 \
+    libfftw3-dev \
+    libgdal-dev \
+    libgeos-dev \
+    libgsl0-dev \
+    libgl1-mesa-dev \
+    libglu1-mesa-dev \
+    libhdf4-alt-dev \
+    libhdf5-dev \
+    libjq-dev \
+    libpq-dev \
+    libproj-dev \
+    libprotobuf-dev \
+    libnetcdf-dev \
+    libsqlite3-dev \
+    libudunits2-dev \
+    lsb-release \
+    netcdf-bin \
+    postgis \
+    protobuf-compiler \
+    sqlite3 \
+    tk-dev \
+    libfmt-dev \
+    unixodbc-dev && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && apt-get install --yes screen vim
 
@@ -87,6 +87,6 @@ RUN mamba install \
     r-StanHeaders==2.32.6 \
     r-assertthat==0.2.1 \
     r-dplyr==1.1.4 \
-    r-tibble==3.2.1
+    r-tibble==3.2.1 
 
 RUN R -e 'install.packages("brms", repos="https://cloud.r-project.org", version="2.21.0")'
