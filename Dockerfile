@@ -28,8 +28,8 @@ RUN apt-get update && \
     gdal-bin \
     lbzip2 \
     libfftw3-dev \
-    libgdal-dev \
-    libgeos-dev \
+    libgdal-dev=3.8.4 \
+    libgeos-dev=3.12.1 \
     libgsl0-dev \
     libgl1-mesa-dev \
     libglu1-mesa-dev \
@@ -82,7 +82,8 @@ RUN mamba install \
     r-spdata==2.3.0 \
     r-pbapply==1.7-2 \
     r-StanHeaders==2.32.6 \
-	r-brms==2.21.0 \
-    r-assertthat_0.2.1 \
+    r-assertthat==0.2.1 \
     r-dplyr==1.1.4 \
     r-tibble==3.2.1
+
+RUN R -e 'install.packages("brms", repos="https://cloud.r-project.org", version="2.21.0")'
