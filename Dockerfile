@@ -1,4 +1,4 @@
-FROM jupyter/r-notebook:lab-3.5.3
+FROM jupyter/r-notebook:lab-4.3.2
 
 COPY . .
 
@@ -88,6 +88,42 @@ RUN mamba install \
     r-StanHeaders==2.32.6 \
     r-assertthat==0.2.1 \
     r-dplyr==1.1.4 \
-    r-tibble==3.2.1 
+    r-tibble==3.2.1 \
+    r-tidyselect=1.2.0 \
+    r-loo=2.7.0 \ 
+    r-TH.data=1.1-2 \
+    r-tensorA=0.36.2.1 \
+    r-timechange=0.3.0 \
+    r-lifecycle=1.0.4 \
+    r-LearnBayes=2.15.1 \
+    r-survival=3.5-7 \
+    r-magrittr=2.0.3 \ 
+    r-posterior=1.5.0 \
+    r-compiler=4.3.2 \
+    r-rlang=1.1.3 \
+    r-tools=4.3.2 \
+    r-utf8=1.2.4 \
+    r-bridgesampling=1.1-2 \
+    r-pkgbuild=1.4.3 \
+    r-classInt=0.4-10 \
+    r-plyr=1.8.9 \
+    r-multcomp=1.4-25 \
+    r-KernSmooth=2.23-22 \
+    r-withr=3.0.0 \ 
+    r-grid=4.3.2 \
+    r-stats4=4.3.2 \
+    r-fansi=1.0.6 \
+    r-e1071=1.7-14 \
+    r-colorspace=2.1-0 \
+    r-inline=0.3.19 \
+    r-MASS=7.3-60 \
+    r-scales=1.3.0 \
+    r-cli=3.6.2 \
+    r-mvtnorm=1.2-4 \
+    r-generics=0.1.3 \
+    r-RcppParallel=5.1.7 \
+    r-tzdb=0.4.0 \
+    r-DBI=1.2.2 \
+    r-proxy=0.4-27 r-bayesplot=1.11.1 r-s2=1.1.6 r-matrixStats=1.2.0 r-vctrs=0.6.5 r-sandwich=3.1-0 r-boot=1.3-28.1 r-jsonlite=1.8.8 r-hms=1.1.3 r-units=0.8-5 r-glue=1.7.0 r-codetools=0.2-19 r-distributional=0.4.0 r-stringi=1.8.3 r-gtable=0.3.4 r-deldir=2.0-4 r-QuickJSR=1.1.3 r-munsell=0.5.0 r-pillar=1.9.0 r-Brobdingnag=1.2-9 r-R6=2.5.1 r-wk=0.9.1 r-rprojroot=2.0.4 r-lattice=0.21-9 r-backports=1.4.1 r-rstantools=2.4.0 r-class=7.3-22 r-coda=0.19-4.1 r-gridExtra=2.3 r-nlme=3.1-163 r-checkmate=2.3.1 r-pkgconfig=2.0.3
 
 RUN R -e 'install.packages("brms", repos="https://cloud.r-project.org", version="2.21.0")'
