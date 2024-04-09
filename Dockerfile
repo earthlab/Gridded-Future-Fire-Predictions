@@ -4,7 +4,7 @@ COPY . .
 
 USER root
 RUN rm -rf .git/
-RUN chmod -R a+w *
+RUN chown -R jovyan .
 
 # Add sudo to jovyan user. 
 RUN apt update && \
@@ -22,41 +22,44 @@ RUN usermod -aG sudo jovyan && \
 RUN addgroup jovyan
 RUN usermod -aG jovyan jovyan
 
-# Build RStudio Geospatial
-RUN apt-get update && \
-    apt install -y \
-    gdal-bin \
-    lbzip2 \
-    libfftw3-dev \
-    libgdal-dev=3.8.4 \
-    libgeos-dev=3.12.1 \
-    libgsl0-dev \
-    libgl1-mesa-dev \
-    libglu1-mesa-dev \
-    libhdf4-alt-dev \
-    libhdf5-dev \
-    libjq-dev \
-    libpq-dev \
-    libproj-dev \
-    libprotobuf-dev \
-    libnetcdf-dev \
-    libsqlite3-dev \
-    libudunits2-dev \
-    lsb-release \
-    netcdf-bin \
-    postgis \
-    protobuf-compiler \
-    sqlite3 \
-    tk-dev \
-    libfmt-dev \
-    unixodbc-dev && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+# # Build RStudio Geospatial
+# RUN apt-get update && \
+#     apt install -y \
+#     gdal-bin \
+#     lbzip2 \
+#     libfftw3-dev \
+#     libgdal-dev=3.8.4 \
+#     libgeos-dev=3.12.1 \
+#     libgsl0-dev \
+#     libgl1-mesa-dev \
+#     libglu1-mesa-dev \
+#     libhdf4-alt-dev \
+#     libhdf5-dev \
+#     libjq-dev \
+#     libpq-dev \
+#     libproj-dev \
+#     libprotobuf-dev \
+#     libnetcdf-dev \
+#     libsqlite3-dev \
+#     libudunits2-dev \
+#     lsb-release \
+#     netcdf-bin \
+#     postgis \
+#     protobuf-compiler \
+#     sqlite3 \
+#     tk-dev \
+#     libfmt-dev \
+#     unixodbc-dev && \
+#     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && apt-get install --yes screen vim
 
 USER ${NB_UID}
 
 RUN mamba install \
+    gdal==3.8.4 \
+    geos==3.12.1 \
+    proj==9.3.1 \
     r-terra==1.7-71 \
     r-stars==0.6-5 \
     r-rcpp==1.0.12 \
