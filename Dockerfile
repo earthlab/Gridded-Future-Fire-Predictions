@@ -45,7 +45,7 @@ WORKDIR /home/rstudio
 COPY . . 
 RUN rm -rf .git .gitignore 
 
-RUN adduser rstudio && chown -R rstudio /home/rstudio
+RUN chown -R rstudio /home/rstudio
 
 # This is where we can control which root permissions the jovyan user will have
 ARG PRIV_CMDS='/bin/ch*,/bin/cat,/bin/gunzip,/bin/tar,/bin/mkdir,/bin/ps,/bin/mv,/bin/cp,/usr/bin/apt*,/usr/bin/pip*,/bin/yum',/opt
