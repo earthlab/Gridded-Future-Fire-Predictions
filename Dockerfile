@@ -38,11 +38,13 @@ RUN apt-get update && \
 
 RUN apt-get update && apt-get install --yes screen vim
 
-RUN R -e "install.packages(c('terra==1.7-71', 'stars==0.6-5', 'rcpp==1.0.12', 'patchwork==1.2.0', 'purrr==1.0.2', 'ggplot2==3.5.0', 'matrix==1.6-1.1', 'zoo==1.8-12', 'sp==2.1-3', 'abind==1.4-5', 'here==1.0.1', 'forcats==1.0.0', 'readr==2.1.5', 'lubridate==1.9.3', 'tidyverse==2.0.0', 'spdep==1.3-3', 'ncdf4==1.22', 'rstan==2.32.6', 'reshape2==1.4.4', 'sf==1.0-15', 'stringr==1.5.1', 'tidyr==1.3.1', 'spdata==2.3.0', 'pbapply==1.7-2', 'StanHeaders==2.32.6', 'assertthat==0.2.1', 'dplyr==1.1.4', 'tibble==3.2.1'))"
+RUN R -e "install.packages(c('here==1.0.1', 'raster==3.6.26', 'terra==1.7-71', 'stars==0.6-5', 'rcpp==1.0.12', 'patchwork==1.2.0', 'purrr==1.0.2', 'ggplot2==3.5.0', 'matrix==1.6-1.1', 'zoo==1.8-12', 'sp==2.1-3', 'abind==1.4-5', 'here==1.0.1', 'forcats==1.0.0', 'readr==2.1.5', 'lubridate==1.9.3', 'tidyverse==2.0.0', 'spdep==1.3-3', 'ncdf4==1.22', 'rstan==2.32.6', 'reshape2==1.4.4', 'sf==1.0-15', 'stringr==1.5.1', 'tidyr==1.3.1', 'spdata==2.3.0', 'pbapply==1.7-2', 'StanHeaders==2.32.6', 'assertthat==0.2.1', 'dplyr==1.1.4', 'tibble==3.2.1'))"
 RUN R -e 'install.packages("brms", repos="https://cloud.r-project.org", version="2.21.0")'
 
+WORKDIR /home/rstudio
+
 COPY . . 
-RUN -rf .git .gitignore 
+RUN rm -rf .git .gitignore 
 
 RUN adduser rstudio && chown -R rstudio /home/rstudio
 
@@ -51,5 +53,5 @@ ARG PRIV_CMDS='/bin/ch*,/bin/cat,/bin/gunzip,/bin/tar,/bin/mkdir,/bin/ps,/bin/mv
 
 RUN usermod -aG sudo rstudio && \
     echo "$LOCAL_USER ALL=NOPASSWD: $PRIV_CMDS" >> /etc/sudoers
-RUN addgroup rstudio
 RUN usermod -aG rstudio rstudio
+ENV PASSWORD=password
