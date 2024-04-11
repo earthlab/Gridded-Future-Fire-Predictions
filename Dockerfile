@@ -10,6 +10,7 @@ RUN apt-get update && \
     apt install -y \
     gdal-bin \
     lbzip2 \
+    libglpk-dev \
     libfftw3-dev \
     libgdal-dev \
     libgeos-dev \
@@ -37,7 +38,7 @@ RUN apt-get update && \
 
 RUN apt-get update && apt-get install --yes screen vim
 
-RUN R -e "install.packages(c('here', 'brms', 'raster', 'terra', 'stars', 'rcpp', 'patchwork', 'purrr', 'ggplot2', 'matrix', 'zoo', 'sp', 'abind', 'here', 'forcats', 'readr', 'lubridate', 'tidyverse', 'spdep', 'ncdf4', 'rstan', 'reshape2', 'sf', 'stringr', 'tidyr', 'spdata', 'pbapply', 'StanHeaders', 'assertthat', 'dplyr', 'tibble'))"
+RUN R -e "install.packages(c('here', 'spatialreg', 'brms', 'raster', 'terra', 'stars', 'rcpp', 'patchwork', 'purrr', 'ggplot2', 'matrix', 'zoo', 'sp', 'abind', 'here', 'forcats', 'readr', 'lubridate', 'tidyverse', 'spdep', 'ncdf4', 'rstan', 'reshape2', 'sf', 'stringr', 'tidyr', 'spdata', 'pbapply', 'StanHeaders', 'assertthat', 'dplyr', 'tibble'))"
 
 WORKDIR /home/rstudio
 
