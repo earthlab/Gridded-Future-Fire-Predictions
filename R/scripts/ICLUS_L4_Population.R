@@ -11,6 +11,11 @@ options(timeout=1000)
 
 project_dir <- here()
 raw_data_dir <- file.path(project_dir, "data", "raw")
+processed_data_dir <- file.path(project_dir, "data", "processed")
+
+if (!dir.exists(processed_data_dir)) {
+  dir.create(processed_data_dir)
+}
 
 ecoregions_l4_dir =  file.path(raw_data_dir, "ecoregions_L4")
 ecoregions_l4_zip = file.path(raw_data_dir, "ecoregions_L4.zip")
@@ -113,7 +118,7 @@ res <- extraction_df %>%
   bind_rows %>%
   rename(housing_density = wmean)
 
-out_file <- file.path(project_dir, 'data', 'processed', 'population_density.csv')
+out_file <- file.path(processed_data_dir, 'population_density.csv')
 
 res %>%
   write_csv(out_file)
