@@ -51,9 +51,9 @@ COPY ./epa.gov.cer .
 RUN cat ./epa.gov.cer >> /usr/local/lib/R/site-library/openssl/cacert.pem
 
 # This is where we can control which root permissions the jovyan user will have
-ARG PRIV_CMDS='/bin/ch*,/bin/cat,/bin/gunzip,/bin/tar,/bin/mkdir,/bin/ps,/bin/mv,/bin/cp,/usr/bin/apt*,/usr/bin/pip*,/bin/yum'
+ARG PRIV_CMDS='/bin/ch*,/bin/cat,/bin/gunzip,/bin/tar,/bin/mkdir,/bin/ps,/bin/mv,/bin/cp,/usr/bin/apt*,/usr/bin/pip*,/bin/yum,/usr/lib/ssl'
 
 RUN usermod -aG sudo rstudio && \
-    echo "$LOCAL_USER ALL=NOPASSWD: $PRIV_CMDS" >> /etc/sudoers
+    echo "rstudio ALL=NOPASSWD: $PRIV_CMDS" >> /etc/sudoers
 RUN usermod -aG rstudio rstudio
 ENV PASSWORD=password
