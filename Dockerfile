@@ -49,6 +49,7 @@ RUN chown -R rstudio /home/rstudio
 # Add EPAs cert to the CA Bundle
 COPY ./epa.gov.cer .
 RUN cat ./epa.gov.cer >> /usr/local/lib/R/site-library/openssl/cacert.pem
+RUN cat ./epa.gov.cer >> /usr/lib/ssl/certs/ca-certificates.crt
 
 # This is where we can control which root permissions the jovyan user will have
 ARG PRIV_CMDS='/bin/ch*,/bin/cat,/bin/gunzip,/bin/tar,/bin/mkdir,/bin/ps,/bin/mv,/bin/cp,/usr/bin/apt*,/usr/bin/pip*,/bin/yum,/usr/lib/ssl'
