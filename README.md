@@ -1,6 +1,18 @@
 ###  Deloitte model procedure
 ### Processing procedure
 
+It is recommended that the processing be done in the R environment provided by the Docker Container at https://hub.docker.com/repository/docker/earthlabcu/gff_pred
+
+In order to run this container, 
+
+```bash
+sudo docker container run -d -p 8787:8787 earthlabcu/gff_pred:latest
+```
+
+Then from your browser navigate to localhost:8787 to access the rstudio application. The username is rstudio and the password is password. 
+
+Next, run the following scripts in order:
+
 # Download and Create yearly tiffs from GridMet past climate data
 # data description and download details @ https://www.climatologylab.org/gridmet.html
 # need URLS in CSV file pointing to NetCDF files
@@ -28,9 +40,6 @@ make-stan-V6.R
 
 ### From Here on you absolutely need HPC capabilities 
 ## I recommend at least 16 CPU and 128GB of RAM  per subset
-## after setting up an instance I use the docker below found at 
-## https://github.com/mbjoseph/wildfire-extremes/tree/2.0
-## docker run -e PASSWORD=yourpassword -d -p 8787:8787 mbjoseph/wildfire-extremes
 
 #Run models
 fit-count-zinb-nuts.R # need to point to correct zi_d file on line 3
